@@ -47,7 +47,9 @@ fn handle_mut_instruction(instruction: &str) -> Option<u32> {
 
 fn parse_arguments_from_match(instruction: &str) -> Option<(u32, u32)> {
     let re = Regex::new(r"(\d+)").unwrap();
-    let captures: Vec<u32> = re.find_iter(instruction).map(|m| m.as_str().parse::<u32>().unwrap()).collect();
+    let captures: Vec<u32> = re.find_iter(instruction).map(|m| {
+        m.as_str().parse::<u32>().unwrap()
+    }).collect();
 
     if captures.len() == 2 {
         Some((captures[0], captures[1]))
