@@ -1,7 +1,5 @@
 advent_of_code::solution!(7);
 
-use evalexpr::*;
-
 enum Calculation { None, Add, Multiply }
 enum Item { Number(usize), Calculation(Calculation) }
 #[derive(Debug)]
