@@ -48,10 +48,7 @@ impl Cpu {
                     .filter_map(|num| num.parse::<isize>().ok())
                     .collect();
 
-                println!("Program numbers: {:?}", numbers);
             }
-        } else {
-            println!("Program line not found");
         }
 
         numbers
@@ -85,9 +82,7 @@ impl Cpu {
     }
 
     fn step(&mut self) -> Option<isize> {
-        // println!("register_a: {:?}, register_b: {:?}, register_c: {:?}, program_counter: {:?}", self.register_a, self.register_b, self.register_c, self.program_counter);
         let instruction = self.advance();
-        println!("instruction: {:?}", instruction);
 
         match instruction {
             0 => { self.adv() },
@@ -111,7 +106,6 @@ impl Cpu {
     fn bxl(&mut self) -> Option<isize> {
         let operand = self.advance();
         let result = self.register_b ^ operand;
-        println!("bxl: {:?} {:?} {:?}", self.register_b, operand, result);
         self.register_b = result;
         None
     }
@@ -127,7 +121,6 @@ impl Cpu {
     fn jnz(&mut self) -> Option<isize> {
         if (self.register_a != 0) {
             let operand = self.advance();
-            println!("jnz: {:?} {:?}", self.register_a, operand);
             self.program_counter = operand as usize;
         }
 
@@ -144,7 +137,6 @@ impl Cpu {
         let operand = self.advance();
         let combo = self.combo_operand(operand);
         let result = combo % 8;
-        println!("out: {:?} {:?} {:?}", operand, combo, result);
         Some(result)
     }
 
@@ -165,8 +157,6 @@ impl Cpu {
         let combo = self.combo_operand(operand);
         let denominator = 2_isize.pow(combo as u32);
         let result = numerator / denominator;
-
-        println!("numer: {:?}, denom: {:?}, combo: {:?}, result: {:?}", numerator, denominator, combo, result);
 
         Some(result)
     }
