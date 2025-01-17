@@ -170,10 +170,6 @@ impl Cpu {
     }
 }
 
-
-
-enum Instruction { Adv, Bxl, Bst, Jnz, Bxc, Out, Bdv, Cdv }
-
 pub fn part_one(input: &str) -> Option<String> {
     let mut cpu = Cpu::from_input(input);
     Some(cpu.execute())
