@@ -55,16 +55,11 @@ impl Cpu {
     }
 
     fn execute(&mut self) -> String {
-        let mut i = 0;
         let mut outputs: Vec<isize> = Vec::new();
         while self.program_counter < self.program.len() {
-            if i > 10000 {
-                break;
-            }
             if let Some(val) = self.step() {
                 outputs.push(val);
             }
-            i += 1;
         }
 
         outputs.into_iter().map(|output| output.to_string()).collect::<Vec<String>>().join(",")
